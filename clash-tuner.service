@@ -1,0 +1,38 @@
+[Unit]
+Description=Start clash-tuner at system boot
+After=network-online.target
+After=suspend.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/clash-tuner/env
+
+### TEMPLATE
+
+# You can overwrite this service by executing `systemctl edit clash-tuner` from shell
+# ExecStart=sh -c "/usr/bin/clash-tuner [user] [conf] [perm] [pidpath]"
+# For more info about parameter exec `nvim $(which clash-tuner)`
+
+# A simple loop to ensure network online and net interface can be found by clash (required by the utun device)
+#ExecStartPre=/bin/sh -c 'until ping -c1 223.5.5.5; do sleep 1; done;'
+
+# A empty `ExecStart` before any `ExecStart` to remove the exist default ExecStart
+#ExecStart=
+
+# Then replace the parameter by your prefer
+#ExecStart=bash -c '/usr/bin/clash-tuner moe iqzone_meta_tun true clash-meta'
+
+# Or just leave the parameters empty, then use the previous saved parameters from envfile 
+#ExecStart=/usr/bin/clash-tuner
+
+### TEMPLATE END
+
+# [TIPS] If this not working correctly, please check any of your systemd wait-online services
+# [TIPS] If you'd like to run script on each time your network changed, check networkd-dispatcher and /usr/share/doc/clash-utils/networkd-dispatcher_restart-on-nif-changes
+
+ExecStart=/usr/bin/clash-tuner
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=suspend.target

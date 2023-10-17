@@ -1,0 +1,14 @@
+#!/bin/bash
+# if you want some on-start-script effective, please link or create a script to /etc/clash-tuner/on-start-script
+
+### The content shown below is just an example
+
+dnsname="prefer-dns.conf"
+dnspath="/etc/clash-tuner/$dnsname"
+olddnsname="clash-tuner-dns.conf"
+dnsconfdir="/etc/systemd/resolved.conf.d"
+
+[[ -s "$dnsconfdir/$olddnsname" ]] && rm "$dnsconfdir/$olddnsname"
+[[ ! -s "$dnsconfdir" ]] && mkdir -p "$dnsconfdir"
+[[ -s "$dnspath" ]] && ln -s $dnspath "$dnsconfdir/$dnsname"
+systemctl restart systemd-resolved

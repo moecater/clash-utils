@@ -1,0 +1,11 @@
+[Unit]
+Description=a tuner to start clash-meta with specific config
+
+[Service]
+Type=exec
+EnvironmentFile=/etc/clash-tuner/env
+User=%i
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+Restart=on-abort
+ExecStart=bash -c "/usr/bin/clash-meta -d $$conf"

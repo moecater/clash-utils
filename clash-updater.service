@@ -1,0 +1,7 @@
+[Unit]
+Description=pull clash config from remote
+
+# You can overwrite this service by executing `systemctl --user edit clash-updater.service` from shell
+[Service]
+Type=oneshot
+ExecStart=bash -c "/usr/bin/clash-updater --bypass-dat"

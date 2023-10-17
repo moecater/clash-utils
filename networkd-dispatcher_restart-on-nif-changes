@@ -1,0 +1,9 @@
+#!/bin/bash
+# You should modify and link this script to /etc/networkd-dispatcher/routable.d/
+
+set -Eeo pipefail
+
+# iface names below is an example, you should use "ip link" to check, and edit it to the one your computer using
+if [[ "$IFACE" = "wlan0" ]] || [[ "$IFACE" = "eno1" ]]; then
+  systemctl restart clash-tuner
+fi

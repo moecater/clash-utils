@@ -1,0 +1,9 @@
+[Unit]
+Description=a tuner to start clash-meta with specific config
+
+[Service]
+Type=exec
+EnvironmentFile=/etc/clash-tuner/env
+User=%i
+Restart=on-abort
+ExecStart=bash -c "/usr/bin/clash-meta -d $$conf"

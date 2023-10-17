@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>clash-tuner</short>
+  <description>The default port 7890 provided by clash is a port of proxy/tunnel.</description>
+  <port port="7890" protocol="tcp"/>
+  <port port="7890" protocol="udp"/>
+</service>
